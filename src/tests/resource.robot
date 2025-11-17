@@ -9,6 +9,23 @@ ${BROWSER}   chrome
 ${HEADLESS}  false
 
 *** Keywords ***
+Reset Application
+    Post  http://localhost:5000/test/reset_all
+    
 Open And Configure Browser
-    Set Selenium Speed  ${DELAY}
-    Open Browser  browser=${BROWSER}
+    Reset Application
+    
+    IF  $BROWSER == 'chrome'
+        ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
+        Call Method  ${options}  add_argument  --incognito
+    ELSE IF  $BROWSER == 'firefox'
+        ${options}  Evaluate  sys.modules['selenium.webdriver'].FirefoxOptions()  sys
+        Call Method  ${options}  add_argument  --private-window
+    END
+    IF  $HEADLESS == 'true'
+        Set Selenium Speed  0.05 seconds
+        Call Method  ${options}  add_argument  --headless
+    ELSE
+        Set Selenium Speed  ${DELAY}
+    END
+    Open Browser  browser=${BROWSER}  options=${options}
