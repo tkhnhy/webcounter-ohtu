@@ -10,4 +10,4 @@ When entered specific number, the counter changes to that
    Page Should Contain  nappia painettu 0 kertaa
    Input Text  number  15
    Click Button  Aseta
-   Page Should Contain  nappia painettu 0 kertaa
+   Page Should Contain  nappia painettu 15 kertaa
