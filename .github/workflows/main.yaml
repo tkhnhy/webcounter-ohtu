@@ -17,8 +17,8 @@ jobs:
           python-version: '3.12'
       - name: Install Poetry
         run: pip install poetry
-      - name: Setup chromedriver
-        uses: nanasess/setup-chromedriver@master
+      - name: Install Chrome + Chromedriver
+        uses: browser-actions/setup-chrome@v1
       - run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
