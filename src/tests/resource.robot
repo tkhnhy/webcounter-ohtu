@@ -1,5 +1,6 @@
 *** Settings ***
 Library  SeleniumLibrary
+Library  RequestsLibrary
 
 *** Variables ***
 ${SERVER}    localhost:5001
@@ -10,7 +11,7 @@ ${HEADLESS}  false
 
 *** Keywords ***
 Reset Application
-    Post  http://localhost:5000/test/reset_all
+    RequestsLibrary.Post    http://localhost:5000/test/reset_all
     
 Open And Configure Browser
     Reset Application
