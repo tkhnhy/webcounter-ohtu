@@ -1,6 +1,5 @@
 *** Settings ***
 Library  SeleniumLibrary
-Library  RequestsLibrary
 
 *** Variables ***
 ${SERVER}    localhost:5001
@@ -9,13 +8,8 @@ ${HOME_URL}  http://${SERVER}
 ${BROWSER}   chrome
 ${HEADLESS}  false
 
-*** Keywords ***
-Reset Application
-    RequestsLibrary.Post    http://localhost:5000/test/reset_all
-    
+*** Keywords ***   
 Open And Configure Browser
-    Reset Application
-    
     IF  $BROWSER == 'chrome'
         ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
         Call Method  ${options}  add_argument  --incognito
